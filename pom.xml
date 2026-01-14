@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Identidad del proyecto -->
+    <groupId>com.delcenjo</groupId>
+    <artifactId>java-gui-projects</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Java GUI Projects</name>
+    <description>Proyecto para practicas de Java con GUI y Swing</description>
+
+    <!-- Configuración del compilador -->
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
+
+    <!-- Dependencias -->
+    <dependencies>
+        <!-- Añade dependencias según necesites -->
+    </dependencies>
+</project>
