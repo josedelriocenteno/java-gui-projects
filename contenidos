@@ -1,0 +1,111 @@
+✅ ÍNDICE REAL PARA APROBAR JAVA SWING (DAM)
+1️⃣ Estructura base (OBLIGATORIO)
+
+Crear clase con main
+
+JFrame
+
+setSize
+
+setDefaultCloseOperation
+
+setLocationRelativeTo(null)
+
+setVisible(true)
+
+👉 Si fallas aquí = 0
+
+2️⃣ Componentes que DEBES dominar
+
+JLabel
+
+JTextField
+
+JPasswordField
+
+JButton
+
+JTextArea
+
+JCheckBox
+
+JRadioButton
+
+JComboBox
+
+👉 Saber:
+
+Crear
+
+Añadir al JFrame
+
+Leer valores (getText, isSelected, etc.)
+
+3️⃣ Eventos (ESTO ES EL EXAMEN)
+
+ActionListener
+
+actionPerformed
+
+Lambda (e -> {})
+
+👉 Saber:
+
+Qué botón se ha pulsado
+
+Leer datos
+
+Ejecutar lógica
+
+📌 80% del examen está aquí
+
+4️⃣ Layouts (SOLO ESTOS)
+
+FlowLayout
+
+BorderLayout
+
+GridLayout
+
+👉 No profundices
+👉 Saber cuándo usar cada uno
+
+5️⃣ JOptionPane (SIEMPRE CAE)
+
+showMessageDialog
+
+showConfirmDialog
+
+👉 Mensajes de:
+
+Error
+
+Confirmación
+
+Aviso
+
+6️⃣ Ejercicios tipo examen (IMPRESCINDIBLES)
+
+Aprende a hacer estos 3 y apruebas:
+
+Login
+
+Usuario
+
+Contraseña
+
+Validación
+
+Formulario CRUD
+
+Alta / Mostrar
+
+Calculadora simple
+
+7️⃣ JTable (SOLO SI LO DA TU PROFE)
+
+Crear tabla
+
+Mostrar datos
+
+Nada avanzado
