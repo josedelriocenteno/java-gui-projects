@@ -5,6 +5,9 @@
 package moto;
 
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import moto.Moto;
 
 /**
@@ -14,31 +17,33 @@ import moto.Moto;
 public class GUIMoto extends javax.swing.JFrame {
 
     private Moto moto;
-    
+
     public GUIMoto(Moto moto) {
         initComponents();
+        this.jLabel5.setOpaque(true);
         this.setLocationRelativeTo(null);
-        this.moto=moto;
+        this.moto = moto;
         mostrarIndicadores();
         datosMoto();
     }
 
-    private void datosMoto(){
-        this.setTitle(moto.getMatricula() + "-" + 
-                moto.getMarca() + " " + moto.getModelo());
+    private void datosMoto() {
+        this.setTitle(moto.getMatricula() + "-"
+                + moto.getMarca() + " " + moto.getModelo());
     }
-    
-    private void mostrarIndicadores(){
+
+    private void mostrarIndicadores() {
         this.jTextField1.setText(String.valueOf(moto.getVelocidad()));
         this.jTextField2.setText(String.valueOf(moto.getDeposito()));
         this.jLabel4.setText(String.valueOf(moto.getPasajeros()));
-        if(moto.isArrancado()){              
+        if (moto.isArrancado()) {
             this.jLabel5.setBackground(Color.GREEN);
-        }else{            
+        } else {
             this.jLabel5.setBackground(Color.RED);
         }
+        this.jLabelError.setText("");
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,13 +61,14 @@ public class GUIMoto extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        jButtonArrancar = new javax.swing.JButton();
+        jButtonParar = new javax.swing.JButton();
+        jButtonAcelerar = new javax.swing.JButton();
+        jButtonDecelerar = new javax.swing.JButton();
+        jButtonSubir = new javax.swing.JButton();
+        jButtonBajar = new javax.swing.JButton();
+        jButtonRepostar = new javax.swing.JButton();
+        jLabelError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,16 +85,11 @@ public class GUIMoto extends javax.swing.JFrame {
 
         jTextField2.setEditable(false);
         jTextField2.setFocusable(false);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
 
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel5.setBackground(new java.awt.Color(255, 51, 255));
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel5.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,24 +134,57 @@ public class GUIMoto extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        jButton1.setText("Arrancar");
-
-        jButton2.setText("Parar");
-
-        jButton3.setText("Acelerar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonArrancar.setText("Arrancar");
+        jButtonArrancar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonArrancarActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Decelerar");
+        jButtonParar.setText("Parar");
+        jButtonParar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPararActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Subir");
+        jButtonAcelerar.setText("Acelerar");
+        jButtonAcelerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAcelerarActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Bajar");
+        jButtonDecelerar.setText("Decelerar");
+        jButtonDecelerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDecelerarActionPerformed(evt);
+            }
+        });
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poo/moto/resources/icono_repostar.png"))); // NOI18N
+        jButtonSubir.setText("Subir");
+        jButtonSubir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSubirActionPerformed(evt);
+            }
+        });
+
+        jButtonBajar.setText("Bajar");
+        jButtonBajar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBajarActionPerformed(evt);
+            }
+        });
+
+        jButtonRepostar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/moto/icono_repostar.png"))); // NOI18N
+        jButtonRepostar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRepostarActionPerformed(evt);
+            }
+        });
+
+        jLabelError.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,72 +195,140 @@ public class GUIMoto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonArrancar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonParar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonDecelerar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonAcelerar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jButtonSubir, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonBajar, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7))
+                        .addComponent(jButtonRepostar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabelError, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(4, 4, 4)
+                .addComponent(jLabelError, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3)
-                            .addComponent(jButton5))
+                            .addComponent(jButtonArrancar)
+                            .addComponent(jButtonAcelerar)
+                            .addComponent(jButtonSubir))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton4)
-                                .addComponent(jButton6))
-                            .addComponent(jButton2)))
-                    .addComponent(jButton7))
-                .addContainerGap(21, Short.MAX_VALUE))
+                                .addComponent(jButtonDecelerar)
+                                .addComponent(jButtonBajar))
+                            .addComponent(jButtonParar)))
+                    .addComponent(jButtonRepostar))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void jButtonArrancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonArrancarActionPerformed
+        try {
+            moto.arrancar();
+            mostrarIndicadores();
+        } catch (Exception ex) {
+           this.jLabelError.setText(ex.getMessage());
+        }        
+    }//GEN-LAST:event_jButtonArrancarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButtonPararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPararActionPerformed
+        try {
+            moto.parar();
+            mostrarIndicadores();
+        } catch (Exception ex) {
+            this.jLabelError.setText(ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonPararActionPerformed
 
-   
-   
+    private void jButtonAcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcelerarActionPerformed
+        try {
+            moto.acelerar();
+            mostrarIndicadores();
+        } catch (Exception ex) {
+            this.jLabelError.setText(ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonAcelerarActionPerformed
+
+    private void jButtonDecelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecelerarActionPerformed
+        try {
+            moto.decelerar();
+            mostrarIndicadores();
+        } catch (Exception ex) {
+            this.jLabelError.setText(ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonDecelerarActionPerformed
+
+    private void jButtonSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubirActionPerformed
+        try {
+            moto.subir();
+            mostrarIndicadores();
+        } catch (Exception ex) {
+           this.jLabelError.setText(ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonSubirActionPerformed
+
+    private void jButtonBajarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajarActionPerformed
+        try {
+            moto.bajar();
+            mostrarIndicadores();
+        } catch (Exception ex) {
+           this.jLabelError.setText(ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonBajarActionPerformed
+
+    private void jButtonRepostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRepostarActionPerformed
+//       JOptionPane.showMessageDialog(this, "Hola pepe");
+//       JOptionPane.showMessageDialog(this, "Hola pepe", "Saludo", JOptionPane.WARNING_MESSAGE);
+        String entrada = JOptionPane.showInputDialog(this, "Litros: ", "Repostar", JOptionPane.PLAIN_MESSAGE);
+        if (entrada != null && !entrada.isEmpty()) {
+            double litros = Double.parseDouble(entrada);
+            if (litros > 0) {
+                try {
+                    moto.repostar(litros);
+                    mostrarIndicadores();
+                } catch (Exception ex) {
+                   this.jLabelError.setText(ex.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_jButtonRepostarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButtonAcelerar;
+    private javax.swing.JButton jButtonArrancar;
+    private javax.swing.JButton jButtonBajar;
+    private javax.swing.JButton jButtonDecelerar;
+    private javax.swing.JButton jButtonParar;
+    private javax.swing.JButton jButtonRepostar;
+    private javax.swing.JButton jButtonSubir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelError;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

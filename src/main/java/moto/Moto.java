@@ -133,43 +133,45 @@ public class Moto {
     public void setPasajeros(int pasajeros) {
         this.pasajeros = pasajeros;
     }
-    
-    
 
     //metodos
     //arrancar
-    public void arrancar() {
+    public void arrancar() throws Exception {
         if (!arrancado) {
             arrancado = true;
             System.out.println("La moto ha arrancado");
         } else {
-            System.out.println("La moto ya esta arrancada");
+            throw new Exception("La moto ya esta arrancada");
         }
     }
 
     //parar
-    public void parar() {
+    public void parar() throws Exception {
         if (arrancado) {
-            arrancado = false;
-            System.out.println("La moto se ha apagado");
+            if (velocidad == 0) {
+                arrancado = false;
+                System.out.println("La moto se ha apagado");
+            } else {
+                throw new Exception("No se puede parar la moto con velocidad");
+            }
         } else {
-            System.out.println("La moto ya esta apagada");
+            throw new Exception("La moto ya esta apagada");
         }
     }
 
     //respostar
     //Metodo que suma al depósito actual de la moto un nº de litros
     //recibido como parámetro
-    public void repostar(double litros) {
+    public void repostar(double litros) throws Exception {
         if (!arrancado) {
-            if (this.deposito + litros >= this.capacidadDeposito) {
-                System.out.println("Demasiados litros. Deposito lleno");
+            if (this.deposito + litros > this.capacidadDeposito) {
                 this.deposito = capacidadDeposito;
+                throw new Exception("Demasiados litros. Deposito lleno");                
             } else {
                 this.deposito += litros;
             }
         } else {
-            System.out.println("Apaga primero la moto");
+            throw new Exception("Apaga primero la moto");
         }
     }
 
@@ -184,61 +186,68 @@ public class Moto {
     }
 
     //acelerar
-    public void acelerar() {
+    public void acelerar() throws Exception {
         if (arrancado) {
-            if (this.deposito >= 0.5) {
-                if (this.velocidad < this.velocidadMax) {
-                    velocidad += 10;
-                    deposito -= 0.5;
-                }else{
-                     System.out.println("No se puede acelerar. Velocidad maxima");
+            if (pasajeros > 0) {
+                if (this.deposito >= 0.5) {
+                    if (this.velocidad < this.velocidadMax) {
+                        velocidad += 10;
+                        deposito -= 0.5;
+                        if (deposito == 0) {
+                            parar();
+                        }
+                    } else {
+                        throw new Exception("No se puede acelerar. Velocidad maxima");
+                    }
+                } else {
+                    throw new Exception("No se puede acelerar. No hay combustible");
                 }
             } else {
-                System.out.println("No se puede acelerar. No hay combustible");
+                throw new Exception("No se puede acelerar la moto. No hay personas");
             }
         } else {
-            System.out.println("No se puede acelerar. Moto parada");
-        }       
+            throw new Exception("No se puede acelerar. Moto parada");
+        }
     }
 
     //decelerar
-    public void decelerar() {
-        if(this.arrancado){
-            if(this.velocidad >= 5){
-                 velocidad -= 5;
-            }else{
-                 System.out.println("No se puede decelerar. Moto parada");
+    public void decelerar() throws Exception {
+        if (this.arrancado) {
+            if (this.velocidad >= 5) {
+                velocidad -= 5;
+            } else {
+                throw new Exception("No se puede decelerar. Moto parada");
             }
-        }else{
-            System.out.println("No se puede decelerar. Moto no arrancada");
-        }   
+        } else {
+            throw new Exception("No se puede decelerar. Moto no arrancada");
+        }
     }
 
     //Método que sube una persona a la moto
-    public void subir() {
-        if(this.velocidad == 0){
-            if(this.pasajeros < this.plazas){
+    public void subir() throws Exception {
+        if (this.velocidad == 0) {
+            if (this.pasajeros < this.plazas) {
                 this.pasajeros++;
-            }else{
-                System.out.println("No se pueden subir mas personas a la moto");
-            }            
-        }else{
-            System.out.println("Moto con velocidad. Primero parala.");
-        }  
+            } else {
+                throw new Exception("No se pueden subir mas personas a la moto");
+            }
+        } else {
+            throw new Exception("Moto con velocidad. Primero parala.");
+        }
     }
-    
+
     //Método que baja una persona de la moto
-    public void bajar() {
-        if(this.velocidad == 0){
-           if(this.pasajeros>=1){
-               this.pasajeros--;
-           }else{
-               System.out.println("No hay personas subidas a la moto");               
-           }           
-        }else{
-            System.out.println("Moto con velocidad. Primero parala.");
-        }  
-        
+    public void bajar() throws Exception {
+        if (this.velocidad == 0) {
+            if (this.pasajeros >= 1) {
+                this.pasajeros--;
+            } else {
+                throw new Exception("No hay personas subidas a la moto");
+            }
+        } else {
+            throw new Exception("Moto con velocidad. Primero parala.");
+        }
+
     }
 
     @Override
